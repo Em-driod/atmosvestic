@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenMenu, onOpenCart, cartCount }) =>
       navStyles = "bg-white/90 backdrop-blur-md text-black py-6 shadow-sm";
     }
   } else {
-    navStyles = "bg-white text-atmos-dark py-6 border-b border-gray-100";
+    navStyles = "bg-black text-white py-6";
   }
 
   return (
@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenMenu, onOpenCart, cartCount }) =>
         <button onClick={onOpenCart} className="relative p-2 hover:bg-black/5 rounded-full transition-colors">
           <ShoppingBag size={20} />
           {cartCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-atmos-indigo text-white text-[9px] flex items-center justify-center rounded-full">
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-white text-[9px] flex items-center justify-center rounded-full">
               {cartCount}
             </span>
           )}
@@ -364,7 +364,7 @@ const MaisonPage = () => {
               <Phone size={24} className="text-atmos-indigo" />
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-widest mb-1">WhatsApp Atelier</h4>
-                <p className="text-gray-500 text-base mb-2 font-medium">+234 806 981 3105</p>
+                <p className="text-gray-500 text-base mb-2 font-medium"> 806 981 3105</p>
                 <p className="text-gray-400 text-sm">Open 10:00 - 18:00 WAT</p>
               </div>
             </div>
