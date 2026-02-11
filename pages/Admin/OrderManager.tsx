@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Edit, CheckCircle2, XCircle, Clock, Search, X, ChevronDown, Package, User, Hash, Activity } from 'lucide-react';
+import { API_BASE_URL } from '../../constants';
 
 const OrderManager = () => {
     const [orders, setOrders] = useState<any[]>([]);
@@ -17,7 +18,7 @@ const OrderManager = () => {
     const fetchOrders = async (month: number, year: number) => {
         const token = localStorage.getItem('adminToken');
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/orders?month=${month}&year=${year}`, {
+            const res = await fetch(`${API_BASE_URL}/api/admin/orders?month=${month}&year=${year}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -34,7 +35,7 @@ const OrderManager = () => {
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const token = localStorage.getItem('adminToken');
-        const url = editingOrder ? `http://localhost:5000/api/admin/orders/${editingOrder._id}` : 'http://localhost:5000/api/admin/orders';
+        const url = editingOrder ? `${API_BASE_URL}/api/admin/orders/${editingOrder._id}` : `${API_BASE_URL}/api/admin/orders`;
         const method = editingOrder ? 'PUT' : 'POST';
 
         try {
@@ -54,7 +55,7 @@ const OrderManager = () => {
         if (!window.confirm('Dissolve this order record?')) return;
         const token = localStorage.getItem('adminToken');
         try {
-            await fetch(`http://localhost:5000/api/admin/orders/${id}`, {
+            await fetch(`${API_BASE_URL}/api/admin/orders/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -68,7 +69,7 @@ const OrderManager = () => {
         const token = localStorage.getItem('adminToken');
         const nextStatus = order.status === 'Pending' ? 'Completed' : 'Pending';
         try {
-            await fetch(`http://localhost:5000/api/admin/orders/${order._id}`, {
+            await fetch(`${API_BASE_URL}/api/admin/orders/${order._id}`, {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: nextStatus })

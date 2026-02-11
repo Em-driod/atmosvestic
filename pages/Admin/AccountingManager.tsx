@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Wallet, Building2, Trash2, X, ChevronDown, ArrowUpRight, ArrowDownLeft, Command, Search, Filter } from 'lucide-react';
+import { API_BASE_URL } from '../../constants';
 
 const AccountingManager = () => {
     const [transactions, setTransactions] = useState<any[]>([]);
@@ -18,7 +19,7 @@ const AccountingManager = () => {
     const fetchTransactions = async (month: number, year: number) => {
         const token = localStorage.getItem('adminToken');
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/transactions?month=${month}&year=${year}`, {
+            const res = await fetch(`${API_BASE_URL}/api/admin/transactions?month=${month}&year=${year}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -36,7 +37,7 @@ const AccountingManager = () => {
         e.preventDefault();
         const token = localStorage.getItem('adminToken');
         try {
-            await fetch('http://localhost:5000/api/admin/transactions', {
+            await fetch(`${API_BASE_URL}/api/admin/transactions`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify(newTx)

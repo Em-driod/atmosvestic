@@ -2,6 +2,7 @@ import React from 'react';
 import { X, Plus, Minus, ArrowRight, ShoppingBag } from 'lucide-react';
 import { CartItem } from '../types';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../constants';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -61,7 +62,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart, onUpdate
                 <div key={(item as any)._id || item.id} className="flex gap-6 animate-fade-up">
                   <div className="w-24 h-32 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
                     <img
-                      src={item.image.startsWith('/uploads') ? `http://localhost:5000${item.image}` : item.image}
+                      src={item.image.startsWith('/uploads') ? `${API_BASE_URL}${item.image}` : item.image}
                       alt={item.name}
                       className="w-full h-full object-cover"
                     />

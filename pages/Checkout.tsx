@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, Check, Lock } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartItem } from '../types';
+import { API_BASE_URL } from '../constants';
 
 interface CheckoutProps {
     cart: CartItem[];
@@ -179,7 +180,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cart, total }) => {
                             <div key={idx} className="flex gap-6 items-center">
                                 <div className="w-16 h-20 bg-white rounded-lg overflow-hidden shrink-0">
                                     <img
-                                        src={item.image.startsWith('/uploads') ? `http://localhost:5000${item.image}` : item.image}
+                                        src={item.image.startsWith('/uploads') ? `${API_BASE_URL}${item.image}` : item.image}
                                         alt={item.name}
                                         className="w-full h-full object-cover"
                                     />

@@ -1,5 +1,8 @@
 import { Product } from './types';
 
+// API Base URL
+export const API_BASE_URL = 'https://atmosvest.onrender.com';
+
 // Hero Assets
 export const HERO_IMAGE = "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=2576&auto=format&fit=crop";
 // High-quality cinematic fabric movement video

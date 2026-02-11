@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Edit, Star, X, UploadCloud, ChevronDown, Search, ArrowRight, ArrowUpRight, Image } from 'lucide-react';
+import { API_BASE_URL } from '../../constants';
 
 const ProductManager = () => {
     const [products, setProducts] = useState<any[]>([]);
@@ -18,7 +19,7 @@ const ProductManager = () => {
     const fetchProducts = async () => {
         try {
             const token = localStorage.getItem('adminToken');
-            const res = await fetch('http://localhost:5000/api/admin/products', {
+            const res = await fetch(`${API_BASE_URL}/api/admin/products`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error('Failed to fetch products');
@@ -47,8 +48,8 @@ const ProductManager = () => {
         }
 
         const url = editingId
-            ? `http://localhost:5000/api/admin/products/${editingId}`
-            : 'http://localhost:5000/api/admin/products';
+            ? `${API_BASE_URL}/api/admin/products/${editingId}`
+            : `${API_BASE_URL}/api/admin/products`;
         const method = editingId ? 'PUT' : 'POST';
 
         try {
@@ -68,7 +69,7 @@ const ProductManager = () => {
     const startEdit = (product: any) => {
         setNewProduct({ ...product });
         setEditingId(product._id);
-        setImagePreview(product.image.startsWith('/uploads') ? `http://localhost:5000${product.image}` : product.image);
+        setImagePreview(product.image.startsWith('/uploads') ? `${API_BASE_URL}${product.image}` : product.image);
         setIsModalOpen(true);
     };
 
@@ -76,7 +77,7 @@ const ProductManager = () => {
         if (!window.confirm('Are you sure you want to delete this product?')) return;
         try {
             const token = localStorage.getItem('adminToken');
-            const res = await fetch(`http://localhost:5000/api/admin/products/${id}`, {
+            const res = await fetch(`${API_BASE_URL}/api/admin/products/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -90,7 +91,7 @@ const ProductManager = () => {
     const toggleTopProduct = async (product: any) => {
         try {
             const token = localStorage.getItem('adminToken');
-            const res = await fetch(`http://localhost:5000/api/admin/products/${product._id}`, {
+            const res = await fetch(`${API_BASE_URL}/api/admin/products/${product._id}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -187,7 +188,7 @@ const ProductManager = () => {
                             {/* IMAGE */}
                             <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
                                 <img
-                                    src={p.image && p.image.startsWith('/uploads') ? `http://localhost:5000${p.image}` : p.image}
+                                    src={p.image && p.image.startsWith('/uploads') ? `${API_BASE_URL}${p.image}` : p.image}
                                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                     alt={p.name}
                                     onError={(e: any) => e.target.src = 'https://via.placeholder.com/1200x1600'}
