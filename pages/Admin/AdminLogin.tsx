@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, ArrowRight } from 'lucide-react';
 import { API_BASE_URL } from '../../constants';
 
 const AdminLogin = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
