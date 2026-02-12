@@ -59,8 +59,22 @@ const ProductManager = () => {
                 body: formData
             });
             if (!res.ok) throw new Error('Failed to save product');
+            const savedProduct = await res.json(); // Capture the response
+
+            setProducts(prevProducts => {
+                if (editingId) {
+                    // Update existing product
+                    return prevProducts.map(p =>
+                        p._id === editingId ? savedProduct : p
+                    );
+                } else {
+                    // Add new product
+                    return [...prevProducts, savedProduct];
+                }
+            });
+
             closeModal();
-            fetchProducts();
+            // Removed fetchProducts() as state is updated directly
         } catch (error) {
             console.error("Save Product Error:", error);
         }
