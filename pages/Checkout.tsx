@@ -56,7 +56,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cart, total }) => {
         const finalMessage = `${partOne}%0A%0A%0A${partTwo}`;
 
         // 4. Send to WhatsApp (Updated Number)
-        window.open(`https://wa.me/2347016969298?text=${finalMessage}`, '_blank');
+        window.open(`https://wa.me/2348069813105?text=${finalMessage}`, '_blank');
         setLoading(false);
     };
 

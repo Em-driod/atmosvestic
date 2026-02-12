@@ -26,7 +26,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart, onUpdate
       `%0A%0A*Total: ₦${subtotal.toLocaleString()}* %0A%0A` +
       `I would like to proceed with this order.`;
 
-    window.open(`https://wa.me/2347016969298?text=${message}`, '_blank');
+    window.open(`https://wa.me/2348069813105?text=${message}`, '_blank');
   };
 
   return (

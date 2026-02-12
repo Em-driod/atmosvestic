@@ -277,7 +277,7 @@ const HomePage: React.FC<{ liveProducts: Product[], onAddToCart: (p: Product) =>
               </p>
             </div>
             <Link to="/collections" className="text-xs font-bold uppercase tracking-[0.3em] border-b-2 border-atmos-dark pb-2 hover:opacity-50 transition-all">
-              All Products
+              Top Products
             </Link>
           </div>
 
