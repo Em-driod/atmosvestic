@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Product } from '../types';
 import { API_BASE_URL } from '../constants';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -11,31 +11,17 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, index, onAddToCart }) => {
     const { ref, isVisible } = useScrollAnimation();
-    const [isImageLoaded, setIsImageLoaded] = useState(false);
 
     return (
         <div ref={ref} className={`group ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.1}s` }}>
             <div className="relative aspect-[4/3] md:aspect-[3/2] overflow-hidden mb-3 bg-atmos-accent/20 cursor-pointer clip-image transition-all duration-700">
-
-                {/* Skeleton Loader - Persist until image is fully loaded */}
-                {!isImageLoaded && (
-                    <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center z-10">
-                        <span className="text-gray-400 text-[10px] uppercase tracking-widest font-bold">Loading...</span>
-                    </div>
-                )}
 
                 <img
                     src={product.image.startsWith('/uploads') ? `${API_BASE_URL}${product.image}` : product.image}
                     alt={product.name}
                     loading="lazy"
                     decoding="async"
-                    onLoad={() => setIsImageLoaded(true)}
-                    /* 
-                       Note: We intentionally don't handle onError to stop loading. 
-                       The user requested that the loader persists even if the image fails.
-                    */
-                    className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 
-            ${isImageLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-lg'}`}
+                    className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 opacity-100 blur-0"
                 />
 
                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
